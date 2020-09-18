@@ -1,4 +1,5 @@
 const User = require("../model/user");
+const News = require("../model/news");
 
 exports.login = async (req, res, next) => {
   const email = req.body.email;
@@ -21,5 +22,25 @@ exports.login = async (req, res, next) => {
   } catch (err) {
     console.log(err);
     res.redirect("/");
+  }
+};
+
+exports.index = async (req, res, next) => {
+  const headline = req.body.headline;
+  const context = req.body.context;
+  const postlink = req.body.postlink;
+  const imagelink = req.body.imagelink;
+  try {
+    const news = new News({
+      headline: headline,
+      context: context,
+      postlink: postlink,
+      imagelink: imagelink,
+    });
+    const result = await news.save();
+    res.status(201).redirect("/index");
+  } catch (err) {
+    console.log(err);
+    res.redirect("/index");
   }
 };

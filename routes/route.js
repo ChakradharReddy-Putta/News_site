@@ -14,6 +14,8 @@ router.get("/index", (req, res, next) => {
   res.render("index", { path: "/index" });
 });
 
+router.post("/newsupdate", controller.index);
+
 router.get("/news", (req, res, next) => {
   res.render("news", { path: "/news" });
 });
